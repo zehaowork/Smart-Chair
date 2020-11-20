@@ -9,12 +9,13 @@ x = 0; %Matrice index row variable
 i = 1; %Matrice index "3-rd" dimension variable
 counter = 1; %Number of data sets collected
 increment = true;
-collected_data = zeros(1000,5,i); %Empty matrice for collected datapoints read from serial port
+collected_data = zeros(1000,10,i); %Empty matrice for collected datapoints read from serial port
 key_value = zeros(100,5); 
 while run
 
     bytes = s.NumBytesAvailable; %Return how many bytes available from serial port
     
+    % after each each session finishes
     while bytes <= 0 %While no bytes available
      
         if counter > 1 && increment == false %When data points collected
@@ -22,7 +23,7 @@ while run
             disp(counter);
             
             %Analyse datapoints collected and return key values
-            [standingUp_time, RMS_distance_ap, RMS_distance_ml, total_cop_path, mean_velocity] = cop_calculator(collected_data(2:x-1,:,i),startSmooth,startSaccadic);
+            [standingUp_time, RMS_distance_ap, RMS_distance_ml, total_cop_path, mean_velocity] = cop_calculator(collected_data(1:x-1,:,i),startSmooth,startSaccadic);
             
             %Save key values in matrice for comparsion
             key_value(i,1) = standingUp_time;
