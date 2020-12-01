@@ -49,19 +49,21 @@ function [standingUp_time, RMS_distance_ap, RMS_distance_ml, total_cop_path, mea
         CoP_placeHolder(x,2) = x_dim/2 *(((F1+F2)-(F4+F3))/Fz); %Calculate CoP AP
         
         CoP_placeHolder(x,3) = Fz; %Calculate total weight for each timestep
-             
         
+         
     end 
      
                 
 %________________FORCE PLATE CALCULATIONS__________________________________
         
-           
+         
+        res = heat_map([CoP_placeHolder(:,2) CoP_placeHolder(:,1)]);
+     
         %Create time table with centre of pressure AP and ML
         CoPmlO_timeTable = timetable(CoP_placeHolder(:,1), 'RowTimes', time_var);
         CoPapO_timeTable = timetable(CoP_placeHolder(:,2), 'RowTimes', time_var);
         weight_timeTable = timetable(CoP_placeHolder(:,3), 'RowTimes', time_var);
-        disp(CoP_placeHolder(:,1));
+       
         
         %plots ap and ml COP versus time
         figure(10);
@@ -115,8 +117,8 @@ function [standingUp_time, RMS_distance_ap, RMS_distance_ml, total_cop_path, mea
         weight_settlingTime = stepinfo(weight_timeTable.Var1);
         %Time from threshold is reached to subject is standing up      
         standingUp_time = weight_settlingTime.RiseTime;
-        disp("this is standing up time"+standingUp_time);
-
+        
+    
         average_weight = mean(CoP_placeHolder(:,3));      
 
         %RD time series = vector distance from the mean CoP to each pair of
@@ -162,5 +164,5 @@ function [standingUp_time, RMS_distance_ap, RMS_distance_ml, total_cop_path, mea
         %Mean velocity = total distance / time - Can also be added for
         %both AP and ML direction
         mean_velocity = total_cop_path / (time(size(time)) - time(1));
-            
+            heatmap(res,'ColorMap',jet(100));
 end

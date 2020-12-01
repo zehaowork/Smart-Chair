@@ -16,8 +16,8 @@ max_x_dim = max(data(:,1));
 max_y_dim = max(data(:,2));
 min_x_dim = min(data(:,1));
 min_y_dim = min(data(:,2));
-x_step = (max_x_dim-min_x_dim)/10;
-y_step = (max_y_dim-min_y_dim)/30;
+x_step = (x_)/10;
+y_step = (max_y_dim-min_y_dim)/ y_dim/30;
 
 
 
