@@ -19,7 +19,7 @@ min_y_dim = min(data(:,2));
 x_step = (max_x_dim-min_x_dim)/10;
 y_step = (max_y_dim-min_y_dim)/30;
 
-
+   
 
 for i=0:9
     for j=0:29
